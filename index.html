@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Image Chatbot</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #121212; color: #fff; text-align: center; }
+    #chatbox { width: 80%; max-width: 600px; margin: 20px auto; background: #1f1f1f; padding: 20px; border-radius: 10px; }
+    input { width: 70%; padding: 10px; border-radius: 5px; border: none; }
+    button { padding: 10px; background: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    img { margin-top: 15px; max-width: 100%; border-radius: 10px; }
+  </style>
+</head>
+<body>
+  <h1>🧠 AI Art Chatbot</h1>
+  <div id="chatbox">
+    <input type="text" id="userInput" placeholder="Describe your image idea..." />
+    <button onclick="generateImage()">Generate</button>
+    <div id="output"></div>
+  </div>
+
+  <script>
+    async function generateImage() {
+      const prompt = document.getElementById('userInput').value;
+      const outputDiv = document.getElementById('output');
+      outputDiv.innerHTML = "<p>🎨 Generating...</p>";
+
+      const apiUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}`;
+      const img = document.createElement("img");
+      img.src = apiUrl;
+
+      img.onload = () => { outputDiv.innerHTML = ""; outputDiv.appendChild(img); };
+      img.onerror = () => { outputDiv.innerHTML = "<p>❌ Error loading image.</p>"; };
+    }
+  </script>
+</body>
+</html>
